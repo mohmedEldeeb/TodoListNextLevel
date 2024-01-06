@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
+// import { Draggable } from 'react-beautiful-dnd';
 
 export interface Todo {
   id: number;
@@ -29,10 +30,26 @@ const SingleTodo: React.FC<SingleTodoType> = ({
   useEffect(() => {
     inputRef.current?.focus();
   }, [edit]);
-
+  const handleDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+  const handleDone = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
+  };
+  const handleEdit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, todo: editTodo } : todo))
+    );
+    setEdit(false);
+  };
   return (
     <>
-      <form className="todos__single">
+      <form className="todos__single" onSubmit={(e) => handleEdit(e, todo.id)}>
         {edit ? (
           <>
             <input
@@ -41,6 +58,9 @@ const SingleTodo: React.FC<SingleTodoType> = ({
               className="todos__single--text"
               ref={inputRef}
             />
+            <button className="save" type="submit">
+              Save
+            </button>
           </>
         ) : todo.isDone ? (
           <s className="todos__single--text">{todo.todo}</s>
@@ -48,14 +68,21 @@ const SingleTodo: React.FC<SingleTodoType> = ({
           <span className="todos__single--text">{todo.todo}</span>
         )}
         <div>
-          <span className="icon">
+          <span
+            onClick={() => {
+              // if (!edit && !todo.isDone) {
+              setEdit(!edit);
+              // }
+            }}
+            className="icon"
+          >
             {" "}
             <AiFillEdit />
           </span>
-          <span className="icon">
+          <span onClick={() => handleDelete(todo.id)} className="icon">
             <AiFillDelete />
           </span>
-          <span className="icon">
+          <span onClick={() => handleDone(todo.id)} className="icon">
             <MdDone />
           </span>
         </div>

@@ -76,6 +76,7 @@
   margin-top: 15px;
   background: rgb(197 46 89);
   transition: 0.2s;
+  position: relative;
 }
 
 .todos__single:hover {
@@ -101,6 +102,24 @@
 }
 .icon:hover {
   color: #2f74c0;
+}
+.save {
+  width: 80px;
+  height: 40px;
+  margin: 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  background-color: #2f74c0;
+  color: white;
+  transition: 0.2s all;
+  box-shadow: 0 0 10px black;
+  cursor: pointer;
+}
+
+.save:hover {
+  background-color: #01050a;
+  color: white;
 }
 @media (max-width: 1100px) {
   .todos {
