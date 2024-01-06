@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputFiled from "./components/InputFiled";
+import TodoList from "./components/TodoList";
 
 import "./App.css";
 
@@ -23,6 +24,12 @@ function App() {
       <div className="App">
         <span className="heading">Todo List</span>
         <InputFiled handelSubmit={handelSubmit} setTodo={setTodo} todo={todo} />
+        {todos?.length ? (
+          <>
+            <p> List</p>
+            <TodoList todos={todos} setTodos={setTodos} />
+          </>
+        ) : null}
       </div>
     </>
   );
