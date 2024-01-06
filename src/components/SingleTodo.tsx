@@ -49,7 +49,11 @@ const SingleTodo: React.FC<SingleTodoType> = ({
   };
   return (
     <>
-      <form className="todos__single" onSubmit={(e) => handleEdit(e, todo.id)}>
+      <form
+        key={index}
+        className="todos__single"
+        onSubmit={(e) => handleEdit(e, todo.id)}
+      >
         {edit ? (
           <>
             <input
@@ -67,7 +71,7 @@ const SingleTodo: React.FC<SingleTodoType> = ({
         ) : (
           <span className="todos__single--text">{todo.todo}</span>
         )}
-        <div>
+        <div className="icons">
           <span
             onClick={() => {
               // if (!edit && !todo.isDone) {
@@ -83,7 +87,14 @@ const SingleTodo: React.FC<SingleTodoType> = ({
             <AiFillDelete />
           </span>
           <span onClick={() => handleDone(todo.id)} className="icon">
-            <MdDone />
+            {/* <MdDone /> */}
+            <input
+              type="checkbox"
+              checked={todo.isDone}
+              onChange={() => {
+                handleDone(todo.id);
+              }}
+            />
           </span>
         </div>
       </form>
