@@ -3,7 +3,6 @@ import InputFiled from "./components/InputFiled";
 import TodoList from "./components/TodoList";
 
 import "./App.css";
-import { toast } from "react-toastify";
 
 export interface Todo {
   id: number;
@@ -27,12 +26,10 @@ function App() {
       <div className="App">
         <span className="heading">Todo List</span>
         <InputFiled handelSubmit={handelSubmit} setTodo={setTodo} todo={todo} />
-        {todos?.length ? (
-          <>
-            <p> List</p>
-            <TodoList todos={todos} setTodos={setTodos} />
-          </>
-        ) : null}
+        <>
+          <p> List</p>
+          <TodoList todos={todos} setTodos={setTodos} />
+        </>
       </div>
     </>
   );
