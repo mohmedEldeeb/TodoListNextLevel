@@ -3,6 +3,7 @@ import InputFiled from "./components/InputFiled";
 import TodoList from "./components/TodoList";
 
 import "./App.css";
+import { toast } from "react-toastify";
 
 export interface Todo {
   id: number;
@@ -16,7 +17,9 @@ function App() {
 
   const handelSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!todo) return;
     setTodos([...todos, { id: Math.random(), isDone: false, todo }]);
+    setTodo("");
   };
 
   return (
